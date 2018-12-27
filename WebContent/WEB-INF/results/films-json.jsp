@@ -4,6 +4,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <%
+@SuppressWarnings("unchecked")
 List<Film> films = (List<Film>) request.getAttribute("films");
 Gson gson = new Gson();
 String jsonInString = gson.toJson(films);

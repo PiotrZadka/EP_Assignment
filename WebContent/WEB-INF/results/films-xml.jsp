@@ -7,6 +7,7 @@
 <%@ page trimDirectiveWhitespaces = "true" %>
 
 <%
+@SuppressWarnings("unchecked")
 FilmList films = new FilmList((List<Film>) request.getAttribute("films"));
 try{
 	JAXBContext jaxbContext = JAXBContext.newInstance(FilmList.class);

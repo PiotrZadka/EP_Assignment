@@ -34,7 +34,6 @@ public class FilmDAO {
 		try {
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -50,7 +49,6 @@ public class FilmDAO {
 					rs.getString("stars"),
 					rs.getString("review"));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	return thisFilm;		
