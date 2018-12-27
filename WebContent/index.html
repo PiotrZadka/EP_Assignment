@@ -1,0 +1,100 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+	<link rel="stylesheet" href="jquery-ui.min.css">
+  <link rel="stylesheet" href="my.css">
+	<script src="external/jquery/jquery.js"></script>
+	<script src="jquery-ui.min.js"></script>
+  <script src="external/jquery/my_ui.js"></script>
+</head>
+
+<body>
+    <!-- Show All movies -->
+    <fieldset id="showAllMovies">
+      <legend>Show all movies</legend>
+      <form>
+        <label for="radio-1">JSON</label>
+        <input type="radio" name="format" id="radio-1">
+        <label for="radio-2">XML</label>
+        <input type="radio" name="format" id="radio-2">
+        <label for="radio-3">String</label>
+        <input type="radio" name="format" id="radio-3">
+        <input class="ui-button ui-widget ui-corner-all" type="submit" value="Show All">
+      </form>
+    </fieldset>
+
+    <!--Search single movie -->
+    <fieldset id="searchMovie">
+      <legend>Search movie</legend>
+      <form id="searchMovie">
+        <div>
+          <label for="radio-4">JSON</label>
+          <input type="radio" name="format" form="searchMovie" id="radio-4">
+          <label for="radio-5">XML</label>
+          <input type="radio" name="format" form="searchMovie" id="radio-5">
+          <label for="radio-6">String</label>
+          <input type="radio" name="format" form="searchMovie" id="radio-6">
+          ID: <input type="text" name="name" />
+        </div>
+        <input class="ui-button ui-widget ui-corner-all" type="submit" value="Search">
+      </form>
+    </fieldset>
+
+    <!--Add movies -->
+    <fieldset id="insertMovie">
+      <legend>Add movie</legend>
+        <form id="addMovies">
+          <div id="inputFields">
+            <input type="text" name="id" placeholder="ID"/>
+            <input type="text" name="title" placeholder="Title"/>
+            <input type="text" name="year" placeholder="Year"/>
+            <input type="text" name="director" placeholder="Director"/>
+            <input type="text" name="stars" placeholder="Stars"/>
+            <textarea rows="4" cols="50" name="review" form="addMovies" placeholder="Enter comment here..."></textarea>
+          </div>
+          <input class="ui-button ui-widget ui-corner-all" id="insertSubmit"type="submit" value="Add">
+        </form>
+    </fieldset>
+
+    <!--Remove movie -->
+    <fieldset id="deleteMovie">
+      <legend>Remove movie</legend>
+      <form>
+        ID: <input type="text" name="name" />
+        <input class="ui-button ui-widget ui-corner-all" type="submit" value="Remove">
+      </form>
+    </fieldset>
+
+    <!--Update movie -->
+    <fieldset id="updateMovie">
+      <legend>Update movie</legend>
+        <div id="inputFields">
+          <input type="text" name="name" placeholder="ID"/>
+          <input type="text" name="name" placeholder="Title"/>
+          <input type="text" name="name" placeholder="Year"/>
+          <input type="text" name="name" placeholder="Director"/>
+          <input type="text" name="name" placeholder="Stars"/>
+          <textarea rows="4" cols="50" name="comment" form="" placeholder="Enter comment here..."></textarea>
+        </div>
+        <input class="ui-button ui-widget ui-corner-all" id="insertSubmit"type="submit" value="Update">
+    </fieldset>
+
+
+    <input type="button" class="ui-button ui-widget ui-corner-all" value="Show Film in Plain Text" id="all-film-text" class="default-button"/>
+
+    <div id="results">
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
