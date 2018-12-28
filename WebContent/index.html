@@ -15,32 +15,22 @@
     <!-- Show All movies -->
     <fieldset id="showAllMovies">
       <legend>Show all movies</legend>
-      <form>
-        <label for="radio-1">JSON</label>
-        <input type="radio" name="format" id="radio-1">
-        <label for="radio-2">XML</label>
-        <input type="radio" name="format" id="radio-2">
-        <label for="radio-3">String</label>
-        <input type="radio" name="format" id="radio-3">
-        <input class="ui-button ui-widget ui-corner-all" type="submit" value="Show All">
-      </form>
+      <input type="button" class="ui-button ui-widget ui-corner-all" value="Show Films in Plain Text" id="all-film-text" class="default-button"/>
+      <input type="button" class="ui-button ui-widget ui-corner-all" value="Show Films as JSON" id="all-film-json" class="default-button"/>
+      <input type="button" class="ui-button ui-widget ui-corner-all" value="Show Films as XML" id="all-film-xml" class="default-button"/>
     </fieldset>
 
     <!--Search single movie -->
     <fieldset id="searchMovie">
       <legend>Search movie</legend>
-      <form id="searchMovie">
-        <div>
+          ID: <input type="text" name="ID" id="movieName"/>
           <label for="radio-4">JSON</label>
           <input type="radio" name="format" form="searchMovie" id="radio-4">
           <label for="radio-5">XML</label>
           <input type="radio" name="format" form="searchMovie" id="radio-5">
           <label for="radio-6">String</label>
           <input type="radio" name="format" form="searchMovie" id="radio-6">
-          ID: <input type="text" name="name" />
-        </div>
-        <input class="ui-button ui-widget ui-corner-all" type="submit" value="Search">
-      </form>
+          <input class="ui-button ui-widget ui-corner-all" id="searchFilmButton" type="submit" value="Search">
     </fieldset>
 
     <!--Add movies -->
@@ -82,9 +72,7 @@
         <input class="ui-button ui-widget ui-corner-all" id="insertSubmit"type="submit" value="Update">
     </fieldset>
 
-
-    <input type="button" class="ui-button ui-widget ui-corner-all" value="Show Film in Plain Text" id="all-film-text" class="default-button"/>
-
+    <!--Resuts for data retrieved from .jsp -->
     <div id="results">
     </div>
 

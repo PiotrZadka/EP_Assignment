@@ -1,6 +1,8 @@
 $(function(){
   $("#all-film-text").click(allFilmsText);
-  // json and xml
+  $("#all-film-json").click(allFilmsJSON);
+  $("#all-film-xml").click(allFilmsXML);
+  $("#searchFilmButton").click(searchFilm);
 });
 
 function allFilmsText(){
@@ -8,14 +10,34 @@ function allFilmsText(){
   insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=string", "#results");
 }
 
-function allFilmsJson(){
-  console.log("allFilmsText Clicked");
-  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=string", "#results", "json");
+function allFilmsJSON(){
+  console.log("allFilmsJSON Clicked");
+  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=json", "#results", "json");
 }
 
-function allFilmsXml(){
-  console.log("allFilmsText Clicked");
-  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=string", "#results", "xml");
+function allFilmsXML(){
+  console.log("allFilmsXML Clicked");
+  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=xml", "#results", "xml");
+}
+
+function searchFilm(){
+  var checkJSON = $('#radio-4').prop('checked');
+  var checkXML = $('#radio-5').prop('checked');
+  var checkSTRING = $('#radio-6').prop('checked');
+  var formatValue;
+  var movieName = $("#movieName").val();
+  
+  if(checkJSON == true){
+	  formatValue = "json";
+  }
+  else if(checkXML == true){
+	  formatValue = "xml";
+  }
+  else if(checkSTRING == true){
+	  formatValue = "stringSingle";
+  }
+  console.log("http://localhost:8080/EP_Assignment/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
+  insertAjaxResult("http://localhost:8080/EP_Assignment/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
 }
 
 
@@ -28,7 +50,7 @@ function insertAjaxResult(address, resultRegion, format)
             success:
                 function(text)
                 {
-                    insertJSON(text, resultRegion);
+                    insertXML(text, resultRegion, address);
                 }
         });
     }
@@ -39,7 +61,18 @@ function insertAjaxResult(address, resultRegion, format)
             success:
                 function(text)
                 {
-                    insertXML(text, resultRegion);
+                    insertJSON(text, resultRegion, address);
+                }
+        });
+    }
+    else if(format == "stringSingle")
+    {
+        $.ajax({
+            url: address,
+            success:
+                function(text)
+                {
+                    insertTextSingle(text, resultRegion, address);
                 }
         });
     }
@@ -59,11 +92,8 @@ function insertAjaxResult(address, resultRegion, format)
 function insertText(text, resultRegion)
 {
     console.log(text);
-
-    var array = JSON.parse(text);
-
-    //console.log(array[2].id);
-
+    var obj = JSON.parse(text);
+    
     $(resultRegion).html("");
     $(resultRegion).append("<table id='results-table'>");
 
@@ -76,22 +106,59 @@ function insertText(text, resultRegion)
     $(resultRegion).append("<th>REVIEW</th>");
     $(resultRegion).append("</tr>");
 
-    for(var i = 0; i < array.length; i++)
+    for(var i = 0; i <= obj.length; i++)
     {
         $(resultRegion).append("<tr>");
-        $(resultRegion).append("<td>" + array[i].id + "</td>");
-        $(resultRegion).append("<td>" + array[i].title + "</td>");
-        $(resultRegion).append("<td>" + array[i].director + "</td>");
-        $(resultRegion).append("<td>" + array[i].year + "</td>");
-        $(resultRegion).append("<td>" + array[i].stars + "</td>");
-        $(resultRegion).append("<td>" + array[i].review + "</td>");
+        $(resultRegion).append("<td>" + obj[i].id + "</td>");
+        $(resultRegion).append("<td>" + obj[i].title + "</td>");
+        $(resultRegion).append("<td>" + obj[i].director + "</td>");
+        $(resultRegion).append("<td>" + obj[i].year + "</td>");
+        $(resultRegion).append("<td>" + obj[i].stars + "</td>");
+        $(resultRegion).append("<td>" + obj[i].review + "</td>");
         $(resultRegion).append("</tr>");
     }
     $(resultRegion).append("</table>");
 }
 
-function insertXML(text, resultRegion)
-{}
+function insertXML(text, resultRegion, address)
+{
+  console.log(text);
+  $(resultRegion).load(address);
+}
 
-function insertJSON(text, resultRegion)
-{}
+function insertJSON(text, resultRegion, address)
+{
+  console.log(text);
+  //Load content of jsp (which is json string of all films)
+  $(resultRegion).load(address);
+}
+
+function insertTextSingle(text, resultRegion)
+{
+    console.log(text);
+    var obj = JSON.parse(text);
+    
+    $(resultRegion).html("");
+    $(resultRegion).append("<table id='results-table'>");
+
+    $(resultRegion).append("<tr>");
+    $(resultRegion).append("<th style='width: 100px;'>ID</th>");
+    $(resultRegion).append("<th style='width: 200px;'>TITLE</th>");
+    $(resultRegion).append("<th style='width: 200px;'>DIRECTOR</th>");
+    $(resultRegion).append("<th style='width: 50px;'>YEAR</th>");
+    $(resultRegion).append("<th>STARS</th>");
+    $(resultRegion).append("<th>REVIEW</th>");
+    $(resultRegion).append("</tr>");
+
+
+        $(resultRegion).append("<tr>");
+        $(resultRegion).append("<td>" + obj.id + "</td>");
+        $(resultRegion).append("<td>" + obj.title + "</td>");
+        $(resultRegion).append("<td>" + obj.director + "</td>");
+        $(resultRegion).append("<td>" + obj.year + "</td>");
+        $(resultRegion).append("<td>" + obj.stars + "</td>");
+        $(resultRegion).append("<td>" + obj.review + "</td>");
+        $(resultRegion).append("</tr>");
+
+    $(resultRegion).append("</table>");
+}
