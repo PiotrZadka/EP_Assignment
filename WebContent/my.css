@@ -7,8 +7,43 @@
 }
 
 #results{
+  margin-top: 20px;
 }
 
 #film-text{
   margin-top: 5px;
 }
+
+#insertMovie{
+  width: 600px;
+}
+
+#updateMovie{
+  width: 600px;
+}
+
+#showAllMovies{
+  width: 600px;
+}
+
+#searchMovie{
+  width: 600px;
+}
+
+#deleteMovie{
+  width: 600px;
+}
+
+#restofinputboxes{
+  width: 250px;
+}
+
+th{
+	background-color: #dce5ed;
+}
+
+td{
+	text-align: center;
+}
+
+

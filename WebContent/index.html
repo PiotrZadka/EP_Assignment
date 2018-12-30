@@ -36,8 +36,7 @@
     <!--Add movies -->
     <fieldset id="insertMovie">
       <legend>Add movie</legend>
-        <form id="addMovies">
-          <div id="inputFields">
+          <div id="insertDiv">
             <input type="text" name="id" placeholder="ID"/>
             <input type="text" name="title" placeholder="Title"/>
             <input type="text" name="year" placeholder="Year"/>
@@ -46,43 +45,37 @@
             <textarea rows="4" cols="50" name="review" form="addMovies" placeholder="Enter comment here..."></textarea>
           </div>
           <input class="ui-button ui-widget ui-corner-all" id="insertSubmit"type="submit" value="Add">
-        </form>
     </fieldset>
 
     <!--Remove movie -->
     <fieldset id="deleteMovie">
       <legend>Remove movie</legend>
-      <form>
-        ID: <input type="text" name="name" />
-        <input class="ui-button ui-widget ui-corner-all" type="submit" value="Remove">
-      </form>
+        ID: <input type="text" id="deleteId" name="name" />
+        <input class="ui-button ui-widget ui-corner-all" id="deleteSubmit" type="submit" value="Remove">
     </fieldset>
 
     <!--Update movie -->
     <fieldset id="updateMovie">
       <legend>Update movie</legend>
-        <div id="inputFields">
-          <input type="text" name="name" placeholder="ID"/>
-          <input type="text" name="name" placeholder="Title"/>
-          <input type="text" name="name" placeholder="Year"/>
-          <input type="text" name="name" placeholder="Director"/>
-          <input type="text" name="name" placeholder="Stars"/>
-          <textarea rows="4" cols="50" name="comment" form="" placeholder="Enter comment here..."></textarea>
-        </div>
-        <input class="ui-button ui-widget ui-corner-all" id="insertSubmit"type="submit" value="Update">
+          <div id="updateDiv">
+            <input type="text" id="updateId" name="updateId" placeholder="ID"/>
+            <input class="ui-button ui-widget ui-corner-all" id="retrieveID"type="submit" value="Get Film Data">
+              <div id="restofinputboxes">
+                <input type="text" id="updateTitle" name="updateTitle" placeholder="Title"/>
+                <input type="text" id="updateYear" name="updateYear" placeholder="Year"/>
+                <input type="text" id="updateDirector" name="updateDirector" placeholder="Director"/>
+                <input type="text" id="updateStars" name="updateStars" placeholder="Stars"/>
+              </div>
+            <textarea rows="4" cols="50" id="updateReview" name="updateReview" form="" placeholder="Enter comment here..."></textarea>
+          </div>
+          <input class="ui-button ui-widget ui-corner-all" id="updateSubmit" type="submit" value="Update">
     </fieldset>
 
     <!--Resuts for data retrieved from .jsp -->
+    <fieldset>
+    <legend>Results output</legend>
     <div id="results">
     </div>
-
-
-
-
-
-
-
-
-
+	</fieldset>
 </body>
 </html>

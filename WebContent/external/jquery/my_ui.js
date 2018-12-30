@@ -1,25 +1,95 @@
+// Each button in front end that is clickable
 $(function(){
   $("#all-film-text").click(allFilmsText);
   $("#all-film-json").click(allFilmsJSON);
   $("#all-film-xml").click(allFilmsXML);
   $("#searchFilmButton").click(searchFilm);
+  
+  $('#retrieveID').click(retrieveID);
+  $('#updateSubmit').click(updateFilm);
+  $('#deleteSubmit').click(deleteFilm);
 });
 
+// Retrieve all films in plain text
 function allFilmsText(){
   console.log("allFilmsText Clicked");
-  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=string", "#results");
+  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=string", "#results", "text");
 }
-
+//Retrieve all films as json
 function allFilmsJSON(){
   console.log("allFilmsJSON Clicked");
   insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=json", "#results", "json");
 }
-
+//Retrieve all films as xml
 function allFilmsXML(){
   console.log("allFilmsXML Clicked");
   insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=xml", "#results", "xml");
 }
-
+//Retrieve ID for Update field
+function retrieveID(){
+  var retrievedID = $('#updateId').val();
+  retrieveMovie("http://localhost:8080/EP_Assignment/GetFilm?ID="+retrievedID+"&format=json");
+}
+//Retrieve update fields with data
+function updateFilm(){
+  var stringRequest = "";
+  var updateID = $('#updateId').val();
+  var updateTitle = $('#updateTitle').val();
+  var updateYear = $('#updateYear').val();
+  var updateDirector = $('#updateDirector').val();
+  var updateStars = $('#updateStars').val();
+  var updateReview = $('#updateReview').val();
+  
+  var testing = encodeURIComponent(updateReview.trim());
+  
+  // Preparing each variable for GET request by substituting special characters with appropriate ones
+  updateID = encodeURIComponent(updateID.trim());
+  updateTitle = encodeURIComponent(updateTitle.trim());
+  updateYear = encodeURIComponent(updateYear.trim());
+  updateDirector = encodeURIComponent(updateDirector.trim());
+  updateStars = encodeURIComponent(updateStars.trim());
+  updateReview = encodeURIComponent(updateReview.trim());
+  var inputData = [];
+  
+  
+  // Checking only for the variables that are set/changed and adding them to whole request. Otherwise ignoring empty inputs.
+  if(updateID != ""){
+	  stringRequest =stringRequest+"ID="+updateID+"&";
+	  inputData.push("ID: "+updateID);
+	  if(updateTitle != ""){
+		  stringRequest =stringRequest+"Title="+updateTitle+"&";
+		  inputData.push("Title: "+updateTitle);
+	  }
+	  if(updateYear != ""){
+		  stringRequest =stringRequest+"Year="+updateYear+"&";
+		  inputData.push("Year: "+updateYear);
+	  }
+	  if(updateDirector != ""){
+		  stringRequest =stringRequest+"Director="+updateDirector+"&";
+		  inputData.push("Director: "+updateDirector);
+	  }
+	  if(updateStars != ""){
+		  stringRequest =stringRequest+"Stars="+updateStars+"&";
+		  inputData.push("Stars: "+updateStars);
+	  }
+	  if(updateReview != ""){
+		  stringRequest =stringRequest+"Review="+updateReview+"&";
+		  inputData.push("Review: "+updateReview);
+	  }
+    
+	  stringRequest = stringRequest.substring(0, stringRequest.length - 1);
+	  console.log(stringRequest);
+	  updateAjax("http://localhost:8080/EP_Assignment/UpdateFilm?"+stringRequest+"",inputData,"#results");
+  }else{
+	 alert("ID can't be empty");
+  }
+}
+//Removing film by id
+function deleteFilm(){
+	deleteId = $('#deleteId').val();
+	deleteAjax("http://localhost:8080/EP_Assignment/DeleteFilm?ID="+deleteId+"","#results");
+}
+//Searching for data for one film with radio buttons for each type (json,xml,text)
 function searchFilm(){
   var checkJSON = $('#radio-4').prop('checked');
   var checkXML = $('#radio-5').prop('checked');
@@ -40,7 +110,7 @@ function searchFilm(){
   insertAjaxResult("http://localhost:8080/EP_Assignment/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
 }
 
-
+//Add new film based on format
 function insertAjaxResult(address, resultRegion, format)
 {
     if(format == "xml")
@@ -54,14 +124,14 @@ function insertAjaxResult(address, resultRegion, format)
                 }
         });
     }
-    else if(format == "json")
+    else if(format == "text")
     {
         $.ajax({
             url: address,
             success:
                 function(text)
                 {
-                    insertJSON(text, resultRegion, address);
+                	insertText(text, resultRegion);
                 }
         });
     }
@@ -83,12 +153,60 @@ function insertAjaxResult(address, resultRegion, format)
             success:
                 function(text)
                 {
-                    insertText(text, resultRegion);
+                    insertJSON(text, resultRegion, address);
                 }
         });
     }
 }
 
+//Updating input fields in update form
+function retrieveMovie(address){
+	
+    $.ajax({
+        url: address,
+        success:
+            function(text)
+            {
+                //Update other input fields
+                $("#updateTitle").val(text.title);
+                $("#updateYear").val(text.year);
+                $("#updateDirector").val(text.director);
+                $("#updateStars").val(text.stars);
+                $("#updateReview").val(text.review);
+            }
+    
+    });
+}
+
+// Updating results for update
+function updateAjax(address,dataArray,resultRegion){
+    $.ajax({
+        url: address,
+        success:
+            function(text)
+            {
+	            $(resultRegion).html("");
+	            $(resultRegion).append(text);	
+            }
+    
+    });
+}
+
+//Updating results for delete
+function deleteAjax(address,resultRegion){
+    $.ajax({
+        url: address,
+        success:
+            function(text)
+            {
+	            $(resultRegion).html("");
+	            $(resultRegion).append(text);	
+            }
+    
+    });
+}
+
+//Updating results for insert all films as text
 function insertText(text, resultRegion)
 {
     console.log(text);
@@ -96,7 +214,6 @@ function insertText(text, resultRegion)
 
     $(resultRegion).html("");
     $(resultRegion).append("<table id='results-table'>");
-
     $(resultRegion).append("<tr>");
     $(resultRegion).append("<th style='width: 100px;'>ID</th>");
     $(resultRegion).append("<th style='width: 200px;'>TITLE</th>");
@@ -120,6 +237,7 @@ function insertText(text, resultRegion)
     $(resultRegion).append("</table>");
 }
 
+//Updating results for insert all films as xml
 function insertXML(text, resultRegion, address)
 {
 	$(resultRegion).html("");
@@ -143,9 +261,9 @@ function insertXML(text, resultRegion, address)
 		$(resultRegion).append("<xmp></film></xmp>");
 	});
 	
-	
 }
 
+//Updating results for insert all films as json
 function insertJSON(text, resultRegion, address)
 {
   console.log(text);
@@ -153,6 +271,7 @@ function insertJSON(text, resultRegion, address)
   $(resultRegion).load(address);
 }
 
+//Updating results for insert of single films as text
 function insertTextSingle(text, resultRegion)
 {
     console.log(text);
