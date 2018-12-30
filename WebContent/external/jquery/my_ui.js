@@ -26,7 +26,7 @@ function searchFilm(){
   var checkSTRING = $('#radio-6').prop('checked');
   var formatValue;
   var movieName = $("#movieName").val();
-  
+
   if(checkJSON == true){
 	  formatValue = "json";
   }
@@ -93,7 +93,7 @@ function insertText(text, resultRegion)
 {
     console.log(text);
     var obj = JSON.parse(text);
-    
+
     $(resultRegion).html("");
     $(resultRegion).append("<table id='results-table'>");
 
@@ -122,8 +122,28 @@ function insertText(text, resultRegion)
 
 function insertXML(text, resultRegion, address)
 {
-  console.log(text);
-  $(resultRegion).load(address);
+	$(resultRegion).html("");
+	console.log(text);
+	var xmlObject = $(text).find("film").each(function(){
+		var id = $(this).find("id").text();
+		var title = $(this).find("title").text();
+		var year = $(this).find("year").text();
+		var director = $(this).find("director").text();
+		var stars = $(this).find("stars").text();
+		var review = $(this).find("review").text();
+		
+		
+		$(resultRegion).append("<xmp><film></xmp>");
+		$(resultRegion).append("<xmp style='margin-left: 10px;'><id>"+id+"</id></xmp>");
+		$(resultRegion).append("<xmp style='margin-left: 10px;'><title>"+title+"</title></xmp>");
+		$(resultRegion).append("<xmp style='margin-left: 10px;'><year>"+year+"</year></xmp>");
+		$(resultRegion).append("<xmp style='margin-left: 10px;'><director>"+director+"</director></xmp>");
+		$(resultRegion).append("<xmp style='margin-left: 10px;'><stars>"+stars+"</stars></xmp>");
+		$(resultRegion).append("<xmp style='margin-left: 10px;'><review>"+review+"</review></xmp>");
+		$(resultRegion).append("<xmp></film></xmp>");
+	});
+	
+	
 }
 
 function insertJSON(text, resultRegion, address)
@@ -137,7 +157,7 @@ function insertTextSingle(text, resultRegion)
 {
     console.log(text);
     var obj = JSON.parse(text);
-    
+
     $(resultRegion).html("");
     $(resultRegion).append("<table id='results-table'>");
 

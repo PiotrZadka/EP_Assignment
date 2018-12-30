@@ -3,7 +3,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlRootElement(name = "Film")
+@XmlRootElement(name = "film")
 @XmlType(propOrder = { "id", "title", "year", "director", "stars", "review" })
 public class Film {
    public Film(int id, String title, int year, String director, String stars,
@@ -66,7 +66,7 @@ public void setReview(String review) {
 }
 @Override
 public String toString() {
-	return "Film [id=" + id + ", title=" + title + ", year=" + year
+	return "film [id=" + id + ", title=" + title + ", year=" + year
 			+ ", director=" + director + ", stars=" + stars + ", review="
 			+ review + "]";
 }   

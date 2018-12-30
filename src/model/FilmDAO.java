@@ -115,18 +115,58 @@ public class FilmDAO {
 	   return true;
    }
    
-   public Integer deleteFilm(Film film) {
-	   int returned = 0;
+   public boolean deleteFilm(int filmID) {
 	   openConnection();
-	   // add delete
-	   return returned;
+	   String deleteSQL = "delete from films where id = "+filmID+"";
+	   System.out.print("Delete query: "+deleteSQL);
+	   try {
+		   stmt.executeUpdate(deleteSQL);
+		   stmt.close();
+	   }catch(SQLException e) {
+		   System.out.print(e);
+		   return false;
+	   }
+	   return true;
    }
    
-   public Integer updateFilm(Film film) {
-	   int returned = 0;
+   public boolean updateFilm(Film film) {
 	   openConnection();
-	   // add update
-	   return returned;
+	   String title = null , director = null, stars = null, review = null;
+	   int year = 0;
+	   String setAttributes= "" ;
+	   if(film.getTitle() != null) {
+		   title = film.getTitle();
+		   setAttributes += "title = '"+title+"',";
+	   }
+	   if(film.getYear() != 0) {
+		   year = film.getYear();
+		   setAttributes += "year = "+year+",";
+	   }
+	   if(film.getDirector() != null) {
+		   director = film.getDirector();
+		   setAttributes += "director = '"+director+"',";
+	   }
+	   if(film.getStars() != null){
+		   stars = film.getStars();
+		   setAttributes += "stars = '"+stars+"',";
+	   }
+	   if(film.getReview() != null) {
+		   review = film.getReview();
+		   setAttributes += "review = '"+review+"',";
+	   }
+	   setAttributes = setAttributes.substring(0,setAttributes.length()-1);
+
+	   String updateSQL = "update films set "+setAttributes+" where id = "+film.getId();
+	   
+	   try {
+		  stmt.executeUpdate(updateSQL);
+		  stmt.close();
+		  closeConnection();
+	   } catch(SQLException e){
+		   System.out.print(e);
+		   return false;
+	   }
+	   return true;
    }
    
 }

@@ -9,38 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Film;
 import model.FilmDAO;
 
 /**
- * Servlet implementation class InsertFilmController
+ * Servlet implementation class DeleteFilmController
  */
-@WebServlet("/InsertFilm")
-public class InsertFilmController extends HttpServlet {
+@WebServlet("/DeleteFilm")
+public class DeleteFilmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public InsertFilmController() {
+    public DeleteFilmController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String insertMessage = null;
-		FilmDAO fdao = new FilmDAO();
+		String deleteMessage = null;
 		int filmID = Integer.valueOf(request.getParameter("ID"));
-		String filmTitle = request.getParameter("Title");
-		int filmYear = Integer.valueOf(request.getParameter("Year"));
-		String filmDirector = request.getParameter("Director");
-		String filmStars = request.getParameter("Stars");
-		String filmReview = request.getParameter("Review");
-		Film film = new Film(filmID,filmTitle,filmYear,filmDirector,filmStars,filmReview);
-		
-		if(fdao.insertFilm(film)) {
-		insertMessage = film+" inserted successfully";
+		FilmDAO fdao = new FilmDAO();
+		if(fdao.deleteFilm(filmID)) {
+			deleteMessage = "Film with ID "+filmID+" deleted successfully";
 		}else {
-			insertMessage = film+" failed to insert";
+			deleteMessage = "Film with ID "+filmID+" failed to delete from database";
 		}
 
-		request.setAttribute("message", insertMessage);
+		request.setAttribute("message", deleteMessage);
 	    response.setContentType("text/plain");
 	    String outputPage = "/WEB-INF/results/filmInsert.jsp";
 	    
@@ -49,10 +41,8 @@ public class InsertFilmController extends HttpServlet {
 	    dispatcher.include(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
