@@ -8,6 +8,8 @@ $(function(){
   $('#retrieveID').click(retrieveID);
   $('#updateSubmit').click(updateFilm);
   $('#deleteSubmit').click(deleteFilm);
+  $('#insertSubmit').click(insertFilm);
+  
 });
 
 // Retrieve all films in plain text
@@ -29,6 +31,18 @@ function allFilmsXML(){
 function retrieveID(){
   var retrievedID = $('#updateId').val();
   retrieveMovie("http://localhost:8080/EP_Assignment/GetFilm?ID="+retrievedID+"&format=json");
+}
+
+//Insert new film by user
+function insertFilm(){
+	var addTitle = $('#addTitle').val();
+	var addYear = $('#addYear').val();
+	var addDirector = $('#addDirector').val();
+	var addStars = $('#addStars').val();
+	var addReview = $('#addReview').val();
+	
+	console.log("http://localhost:8080/EP_Assignment/InsertFilm?Title="+addTitle+"&Year="+addYear+"&Director="+addStars+"&Stars="+addStars+"&Review="+addReview);
+	addMovieAjax("http://localhost:8080/EP_Assignment/InsertFilm?Title="+addTitle+"&Year="+addYear+"&Director="+addStars+"&Stars="+addStars+"&Review="+addReview,"#results");
 }
 //Retrieve update fields with data
 function updateFilm(){
@@ -88,6 +102,19 @@ function updateFilm(){
 function deleteFilm(){
 	deleteId = $('#deleteId').val();
 	deleteAjax("http://localhost:8080/EP_Assignment/DeleteFilm?ID="+deleteId+"","#results");
+}
+
+function addMovieAjax(address,resultRegion){
+    $.ajax({
+        url: address,
+        success:
+            function(text)
+            {
+	            $(resultRegion).html("");
+	            $(resultRegion).append(text);	
+            }
+    
+    });
 }
 //Searching for data for one film with radio buttons for each type (json,xml,text)
 function searchFilm(){

@@ -26,13 +26,12 @@ public class InsertFilmController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String insertMessage = null;
 		FilmDAO fdao = new FilmDAO();
-		int filmID = Integer.valueOf(request.getParameter("ID"));
 		String filmTitle = request.getParameter("Title");
 		int filmYear = Integer.valueOf(request.getParameter("Year"));
 		String filmDirector = request.getParameter("Director");
 		String filmStars = request.getParameter("Stars");
 		String filmReview = request.getParameter("Review");
-		Film film = new Film(filmID,filmTitle,filmYear,filmDirector,filmStars,filmReview);
+		Film film = new Film(0,filmTitle,filmYear,filmDirector,filmStars,filmReview);
 		
 		if(fdao.insertFilm(film)) {
 		insertMessage = film+" inserted successfully";

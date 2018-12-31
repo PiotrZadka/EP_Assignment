@@ -100,8 +100,7 @@ public class FilmDAO {
    
    public boolean insertFilm(Film film) {
 	   openConnection();
-	   String insertSQL = "insert into films (id,title,year,director,stars,review) values("
-	   		+film.id+","+"'"+film.title+"'"+","+film.year+","+"'"+film.director+"'"+","+"'"+film.stars+"'"+","+"'"+film.review+"');";
+	   String insertSQL = "insert into films (title,year,director,stars,review) values('"+film.title+"'"+","+film.year+","+"'"+film.director+"'"+","+"'"+film.stars+"'"+","+"'"+film.review+"');";
 	   //Checking if the query is correct
 	   System.out.print(insertSQL);
 	   try {
