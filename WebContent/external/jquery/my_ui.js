@@ -15,22 +15,22 @@ $(function(){
 // Retrieve all films in plain text
 function allFilmsText(){
   console.log("allFilmsText Clicked");
-  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=string", "#results", "text");
+  insertAjaxResult("https://eloquent-yew-227217.appspot.com/GetAllFilms?format=string", "#results", "text");
 }
 //Retrieve all films as json
 function allFilmsJSON(){
   console.log("allFilmsJSON Clicked");
-  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=json", "#results", "json");
+  insertAjaxResult("https://eloquent-yew-227217.appspot.com/GetAllFilms?format=json", "#results", "json");
 }
 //Retrieve all films as xml
 function allFilmsXML(){
   console.log("allFilmsXML Clicked");
-  insertAjaxResult("http://localhost:8080/EP_Assignment/GetAllFilms?format=xml", "#results", "xml");
+  insertAjaxResult("https://eloquent-yew-227217.appspot.com/GetAllFilms?format=xml", "#results", "xml");
 }
 //Retrieve ID for Update field
 function retrieveID(){
   var retrievedID = $('#updateId').val();
-  retrieveMovie("http://localhost:8080/EP_Assignment/GetFilm?ID="+retrievedID+"&format=json");
+  retrieveMovie("https://eloquent-yew-227217.appspot.com/GetFilm?ID="+retrievedID+"&format=json");
 }
 
 //Insert new film by user
@@ -41,8 +41,8 @@ function insertFilm(){
 	var addStars = $('#addStars').val();
 	var addReview = $('#addReview').val();
 	
-	console.log("http://localhost:8080/EP_Assignment/InsertFilm?Title="+addTitle+"&Year="+addYear+"&Director="+addStars+"&Stars="+addStars+"&Review="+addReview);
-	addMovieAjax("http://localhost:8080/EP_Assignment/InsertFilm?Title="+addTitle+"&Year="+addYear+"&Director="+addStars+"&Stars="+addStars+"&Review="+addReview,"#results");
+	console.log("https://eloquent-yew-227217.appspot.com/InsertFilm?Title="+addTitle+"&Year="+addYear+"&Director="+addStars+"&Stars="+addStars+"&Review="+addReview);
+	addMovieAjax("https://eloquent-yew-227217.appspot.com/InsertFilm?Title="+addTitle+"&Year="+addYear+"&Director="+addStars+"&Stars="+addStars+"&Review="+addReview,"#results");
 }
 //Retrieve update fields with data
 function updateFilm(){
@@ -93,7 +93,7 @@ function updateFilm(){
     
 	  stringRequest = stringRequest.substring(0, stringRequest.length - 1);
 	  console.log(stringRequest);
-	  updateAjax("http://localhost:8080/EP_Assignment/UpdateFilm?"+stringRequest+"",inputData,"#results");
+	  updateAjax("https://eloquent-yew-227217.appspot.com/UpdateFilm?"+stringRequest+"",inputData,"#results");
   }else{
 	 alert("ID can't be empty");
   }
@@ -101,7 +101,7 @@ function updateFilm(){
 //Removing film by id
 function deleteFilm(){
 	deleteId = $('#deleteId').val();
-	deleteAjax("http://localhost:8080/EP_Assignment/DeleteFilm?ID="+deleteId+"","#results");
+	deleteAjax("https://eloquent-yew-227217.appspot.com/DeleteFilm?ID="+deleteId+"","#results");
 }
 
 function addMovieAjax(address,resultRegion){
@@ -133,8 +133,8 @@ function searchFilm(){
   else if(checkSTRING == true){
 	  formatValue = "stringSingle";
   }
-  console.log("http://localhost:8080/EP_Assignment/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
-  insertAjaxResult("http://localhost:8080/EP_Assignment/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
+  console.log("https://eloquent-yew-227217.appspot.com/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
+  insertAjaxResult("https://eloquent-yew-227217.appspot.com/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
 }
 
 //Add new film based on format
