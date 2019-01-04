@@ -20,9 +20,9 @@
       <input type="button" class="ui-button ui-widget ui-corner-all" value="Show Films as XML" id="all-film-xml" class="default-button"/>
     </fieldset>
 
-    <!--Search single movie -->
+    <!--Search single movie by ID -->
     <fieldset id="searchMovie">
-      <legend>Search movie</legend>
+      <legend>Search movie by ID</legend>
           ID: <input type="text" name="ID" id="movieName"/>
           <label for="radio-4">JSON</label>
           <input type="radio" name="format" form="searchMovie" id="radio-4">
@@ -31,6 +31,19 @@
           <label for="radio-6">String</label>
           <input type="radio" name="format" form="searchMovie" id="radio-6">
           <input class="ui-button ui-widget ui-corner-all" id="searchFilmButton" type="submit" value="Search">
+    </fieldset>
+    
+        <!--Search single movie by Name -->
+    <fieldset id="searchMovieByName">
+      <legend>Search movie by Name</legend>
+          Name: <input type="text" name="ID" id="movieNameName"/>
+          <label for="radio-7">JSON</label>
+          <input type="radio" name="format" form="searchMovieName" id="radio-7">
+          <label for="radio-8">XML</label>
+          <input type="radio" name="format" form="searchMovieName" id="radio-8">
+          <label for="radio-9">String</label>
+          <input type="radio" name="format" form="searchMovieName" id="radio-9">
+          <input class="ui-button ui-widget ui-corner-all" id="searchFilmNameButton" type="submit" value="Search">
     </fieldset>
 
     <!--Add movies -->

@@ -77,7 +77,7 @@ public class FilmDAO {
 
 	   return allFilms;
    }
-
+   //Searching movies by ID
    public Film getFilmByID(int id){
 	   
 		openConnection();
@@ -97,7 +97,30 @@ public class FilmDAO {
 
 	   return oneFilm;
    }
+   //Searching movies by name
+   public ArrayList<Film> getFilmByName(String name){
+	   
+		ArrayList<Film> allFilmsNames = new ArrayList<Film>();
+		openConnection();
+		
+	    // Create select statement and execute it
+		try{
+		    String selectSQL = "select * from films where title like '%"+name+"%'";
+		    ResultSet rs1 = stmt.executeQuery(selectSQL);
+	    // Retrieve the results
+		    while(rs1.next()){
+		    	oneFilm = getNextFilm(rs1);
+		    	allFilmsNames.add(oneFilm);
+		   }
+
+		    stmt.close();
+		    closeConnection();
+		} catch(SQLException se) { System.out.println(se); }
+
+	   return allFilmsNames;
+   }
    
+   //Adding movie to database
    public boolean insertFilm(Film film) {
 	   openConnection();
 	   String insertSQL = "insert into films (title,year,director,stars,review) values('"+film.title+"'"+","+film.year+","+"'"+film.director+"'"+","+"'"+film.stars+"'"+","+"'"+film.review+"');";
@@ -114,6 +137,7 @@ public class FilmDAO {
 	   return true;
    }
    
+   // Deleting movie from DB
    public boolean deleteFilm(int filmID) {
 	   openConnection();
 	   String deleteSQL = "delete from films where id = "+filmID+"";
@@ -128,6 +152,7 @@ public class FilmDAO {
 	   return true;
    }
    
+   //Updating movie in DB
    public boolean updateFilm(Film film) {
 	   openConnection();
 	   String title = null , director = null, stars = null, review = null;

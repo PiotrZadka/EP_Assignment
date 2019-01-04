@@ -4,11 +4,13 @@ $(function(){
   $("#all-film-json").click(allFilmsJSON);
   $("#all-film-xml").click(allFilmsXML);
   $("#searchFilmButton").click(searchFilm);
+  $("#searchFilmNameButton").click(searchFilmName);
   
   $('#retrieveID').click(retrieveID);
   $('#updateSubmit').click(updateFilm);
   $('#deleteSubmit').click(deleteFilm);
   $('#insertSubmit').click(insertFilm);
+
   
 });
 
@@ -136,6 +138,29 @@ function searchFilm(){
   console.log("https://eloquent-yew-227217.appspot.com/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
   insertAjaxResult("https://eloquent-yew-227217.appspot.com/GetFilm?ID="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
 }
+
+//Search film by name
+function searchFilmName(){
+	  var checkJSON = $('#radio-7').prop('checked');
+	  var checkXML = $('#radio-8').prop('checked');
+	  var checkSTRING = $('#radio-9').prop('checked');
+	  var formatValue;
+	  var movieName = $("#movieNameName").val();
+	  movieName = encodeURIComponent(movieName.trim());
+	  console.log("This"+movieName);
+
+	  if(checkJSON == true){
+		  formatValue = "json";
+	  }
+	  else if(checkXML == true){
+		  formatValue = "xml";
+	  }
+	  else if(checkSTRING == true){
+		  formatValue = "stringSingle";
+	  }
+	  console.log("https://eloquent-yew-227217.appspot.com/GetFilmName?Title="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
+	  insertAjaxResult("https://eloquent-yew-227217.appspot.com/GetFilmName?Title="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
+	}
 
 //Add new film based on format
 function insertAjaxResult(address, resultRegion, format)
