@@ -147,7 +147,6 @@ function searchFilmName(){
 	  var formatValue;
 	  var movieName = $("#movieNameName").val();
 	  movieName = encodeURIComponent(movieName.trim());
-	  console.log("This"+movieName);
 
 	  if(checkJSON == true){
 		  formatValue = "json";
@@ -156,7 +155,7 @@ function searchFilmName(){
 		  formatValue = "xml";
 	  }
 	  else if(checkSTRING == true){
-		  formatValue = "stringSingle";
+		  formatValue = "text";
 	  }
 	  console.log("https://eloquent-yew-227217.appspot.com/GetFilmName?Title="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
 	  insertAjaxResult("https://eloquent-yew-227217.appspot.com/GetFilmName?Title="+movieName+"&format="+formatValue+"", "#results", ""+formatValue+"");
