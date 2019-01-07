@@ -27,8 +27,12 @@ public class GetFilmController extends HttpServlet {
 		
 		FilmDAO fdao = new FilmDAO();
 		Film film = new Film();
+		
+		// Requesting ID for a film that is going to be retrieved from database
 		int filmID = Integer.valueOf(request.getParameter("ID"));
 		System.out.print(filmID);
+		
+		// Calling methord from DAO to retrieve film based on ID
 		film = fdao.getFilmByID(filmID);
 		System.out.print(film);
 		

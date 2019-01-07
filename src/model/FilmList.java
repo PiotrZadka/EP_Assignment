@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 
+//Root elements for XML response
 @XmlRootElement (name = "filmlist")
 @XmlAccessorType (XmlAccessType.FIELD)
 	

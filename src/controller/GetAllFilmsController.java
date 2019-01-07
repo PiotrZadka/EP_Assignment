@@ -28,8 +28,10 @@ public class GetAllFilmsController extends HttpServlet {
 
 		FilmDAO fdao = new FilmDAO();
 		
+		// Storing all films in a films object array
 		ArrayList<Film> films = fdao.getAllFilms();
 		
+		// Setting atribute containing all films and passing to result .jsp based on format
 		request.setAttribute("films", films);
 	    String format = request.getParameter("format");
 	    String outputPage;

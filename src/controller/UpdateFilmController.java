@@ -33,6 +33,8 @@ public class UpdateFilmController extends HttpServlet {
 		String filmReview = null;
 		int filmYear = 0;
 		
+		//Requesting parameter only if it exist in request form. Otherwise it's being skipped. 
+		//This allows to update any amount of parameters at once 
 		int filmID = Integer.valueOf(request.getParameter("ID"));
 		if(request.getParameterMap().containsKey("Title")) {
 			filmTitle = request.getParameter("Title");

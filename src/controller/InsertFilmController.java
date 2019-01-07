@@ -26,6 +26,8 @@ public class InsertFilmController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String insertMessage = null;
 		FilmDAO fdao = new FilmDAO();
+		//Requesting all parameters (beside ID) that will be used to generate new tuple in DB with new film details
+		//ID is not being requested as the ID is auto incremented in database
 		String filmTitle = request.getParameter("Title");
 		int filmYear = Integer.valueOf(request.getParameter("Year"));
 		String filmDirector = request.getParameter("Director");

@@ -26,9 +26,9 @@ public class GetFilmNameController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FilmDAO fdao = new FilmDAO();
+		// Requesting Title parameter to search for specific film based on Title
 		String filmTitle = request.getParameter("Title");
 		ArrayList<Film> films = fdao.getFilmByName(filmTitle);
-		
 		request.setAttribute("films", films);
 	    String format = request.getParameter("format");
 	    String outputPage;

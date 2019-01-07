@@ -13,6 +13,8 @@ public class FilmDAO {
     String password = "assignment123";
     // Note none default port used, 6306 not 3306
     // String url = "jdbc:mysql://mudfoot.doc.stu.mmu.ac.uk:6306/"+user;
+    
+    //Amazon Databae Endpoint
     String urlAmazon = "jdbc:mysql://mypersonaldb.c02v0xwfynp3.us-east-2.rds.amazonaws.com:3306/filmsDB";
 
 	public FilmDAO() {}
@@ -56,6 +58,7 @@ public class FilmDAO {
 	
 	
 	
+	// Requesting list of all films from database and storing in array
    public ArrayList<Film> getAllFilms(){
 	   
 		ArrayList<Film> allFilms = new ArrayList<Film>();
@@ -77,6 +80,7 @@ public class FilmDAO {
 
 	   return allFilms;
    }
+   
    //Searching movies by ID
    public Film getFilmByID(int id){
 	   
